@@ -28,4 +28,16 @@ class CategoryModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+        // Cập nhật
+    public function update($id, $name, $description)
+    {
+        $sql = "UPDATE `tour_categories` SET `name`= :name,`description`= :description WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
 }
